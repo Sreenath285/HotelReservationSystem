@@ -9,7 +9,6 @@ public class HotelServices {
 
     /***
      * created addHotel method to add hotels to the list
-     * @return
      */
     public void addHotel () {
         System.out.print("Enter number of hotels to add : ");
