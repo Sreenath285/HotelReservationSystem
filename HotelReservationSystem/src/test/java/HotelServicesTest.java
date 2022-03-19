@@ -1,0 +1,24 @@
+import org.junit.Assert;
+import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+class HotelServicesTest {
+
+    @Test
+    void addHotelTest() {
+        List<Hotel> hotelListTest = new ArrayList<>();
+        Hotel lakeWood = new Hotel("Lakewood", 110);
+        hotelListTest.add(lakeWood);
+        Assert.assertTrue(true);
+        Hotel bridgeWood = new Hotel("BridgeWood", 160);
+        hotelListTest.add(bridgeWood);
+        Assert.assertTrue(true);
+        Hotel ridgeWood = new Hotel("RidgeWood", 220);
+        hotelListTest.add(ridgeWood);
+        Assert.assertTrue(true);
+    }
+}
