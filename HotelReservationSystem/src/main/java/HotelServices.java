@@ -143,18 +143,32 @@ public class HotelServices {
         double totalCharge = 0.0;
         if (!hotelList.isEmpty()) {
             LocalDate[] bookingDates = getBookingDates();
+            findCheapestHotel(bookingDates);
             sortedHotelList = hotelList.stream()
                     .sorted(Comparator.comparingInt(Hotel::getRating)).toList();
-            cheapestBestRatedHotel = sortedHotelList.get(sortedHotelList.size() - 1).getHotelName();
-            for (LocalDate bookingDate : bookingDates) {
-                if (isWeekend(bookingDate)) {
-                    totalCharge += sortedHotelList.get(0).getWeekendRegularRate();
-                } else {
-                    totalCharge += sortedHotelList.get(0).getWeekdayRegularRate();
+            cheapestBestRatedHotel = sortedHotelList.get(0).getHotelName();
+            if (type.equalsIgnoreCase("Regular")) {
+                for (LocalDate bookingDate : bookingDates) {
+                    if (isWeekend(bookingDate)) {
+                        totalCharge += sortedHotelList.get(0).getWeekendRegularRate();
+                    } else {
+                        totalCharge += sortedHotelList.get(0).getWeekdayRegularRate();
+                    }
                 }
             }
-            System.out.println("Cheapest best rated hotel : " + cheapestBestRatedHotel +
-                    " - Total cost : " + totalCharge);
+
+            else if (type.equalsIgnoreCase("Reward")) {
+                for (LocalDate bookingDate : bookingDates) {
+                    if (isWeekend(bookingDate)) {
+                        totalCharge += sortedHotelList.get(0).getWeekendRewardRates();
+                    } else {
+                        totalCharge += sortedHotelList.get(0).getWeekdayRegularRate();
+                    }
+                }
+            }
+            System.out.println("Customer type : " + type +
+                    "\nCheapest best rated hotel : " + cheapestBestRatedHotel +
+                    "\nTotal cost : " + totalCharge);
         } else {
             System.out.println("Add hotels");
         }
@@ -181,7 +195,7 @@ public class HotelServices {
                 }
             }
             System.out.println("Best rated hotel : " + bestRatedHotel +
-                    " - Total cost : " + totalCharge);
+                    "\nTotal cost : " + totalCharge);
         } else {
             System.out.println("Add hotels");
         }
